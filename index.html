@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeFlow | Blood Donation Sri Lanka</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <button id="scrollToTop" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/images/logo.png" alt="LifeFlow Logo">
+            <span>LifeFlow</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#donors">For Donors</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <section class="slider-container" id="home">
+        <div class="slider">
+            <div class="slide active">
+                <img src="assets/images/nurse.jpg" alt="Welcome Nurse">
+            </div>
+            <div class="slide">
+                <img src="assets/images/blood.jpg" alt="Blood Info">
+            </div>
+        </div>
+        
+        <div class="typing-container">
+            <h1 id="typing-text"></h1>
+        </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <h2>Our Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://via.placeholder.com/300" alt="Gallery 1"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300" alt="Gallery 2"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300" alt="Gallery 3"></div>
+            <div class="gallery-item"><img src="https://via.placeholder.com/300" alt="Gallery 4"></div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <h2>Live Blood Stock Status</h2>
+        <div class="charts-container">
+            <div class="chart-box">
+                <h3>Available Stock (Pie Chart)</h3>
+                <canvas id="bloodPieChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <h3>Stock vs. Target (Bar Graph)</h3>
+                <canvas id="bloodBarChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 LifeFlow. All Rights Reserved. | Maintained by <strong>CoderixSoft Technologies</strong></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
