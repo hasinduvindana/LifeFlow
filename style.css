@@ -8,6 +8,13 @@
 
 body {
     background-color: #f9f9f9;
+    background-image:
+        radial-gradient(circle at 15% 20%, rgba(231, 76, 60, 0.16) 0 45px, transparent 46px),
+        radial-gradient(circle at 75% 18%, rgba(192, 57, 43, 0.14) 0 60px, transparent 61px),
+        radial-gradient(circle at 28% 72%, rgba(231, 76, 60, 0.13) 0 52px, transparent 53px),
+        radial-gradient(circle at 82% 70%, rgba(176, 58, 46, 0.12) 0 68px, transparent 69px),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.95), rgba(252, 241, 241, 0.95));
+    background-attachment: fixed;
     color: #333;
     scroll-behavior: smooth;
 }
@@ -46,6 +53,10 @@ body {
     list-style: none;
 }
 
+.nav-links li {
+    position: relative;
+}
+
 .nav-links li a {
     text-decoration: none;
     color: #333;
@@ -56,6 +67,61 @@ body {
 
 .nav-links li a:hover {
     color: #e74c3c;
+}
+
+.dropdown .submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 250px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.14);
+    list-style: none;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    z-index: 1200;
+}
+
+.dropdown:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.submenu li a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    color: #2c3e50;
+}
+
+.submenu li a:hover {
+    background: #fdf0ef;
+    color: #c0392b;
+}
+
+.admin-login-btn {
+    background: #2c3e50;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.admin-login-btn i {
+    margin-right: 6px;
+}
+
+.admin-login-btn:hover {
+    background: #1b2835;
+    transform: translateY(-1px);
 }
 
 /* Typing Animation Container */
@@ -167,6 +233,99 @@ body {
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.login-modal {
+    width: 100%;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: relative;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
+.login-modal h2 {
+    margin-bottom: 18px;
+    color: #c0392b;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #888;
+}
+
+.admin-login-form {
+    display: grid;
+    gap: 16px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.password-wrap {
+    position: relative;
+}
+
+.password-wrap input {
+    padding-right: 45px;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #666;
+    cursor: pointer;
+}
+
+.login-submit-btn {
+    border: none;
+    background: #e74c3c;
+    color: #fff;
+    padding: 11px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-submit-btn:hover {
+    background: #c0392b;
+}
+
 /* Back to Top Button */
 #scrollToTop {
     display: none;
@@ -197,6 +356,10 @@ footer {
 /* Mobile Compatibility */
 @media screen and (max-width: 768px) {
     .nav-links { display: none; } /* Simplified for this example */
+    .admin-login-btn {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
     .slider-container {
         height: 60vh;
         min-height: 320px;

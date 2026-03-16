@@ -98,4 +98,60 @@ document.addEventListener("DOMContentLoaded", () => {
             window.scrollTo({ top: 0, behavior: "smooth" });
         });
     }
+
+    // Admin login modal behavior.
+    const openAdminLogin = document.getElementById("openAdminLogin");
+    const closeAdminLogin = document.getElementById("closeAdminLogin");
+    const adminModal = document.getElementById("adminModal");
+    const adminPassword = document.getElementById("adminPassword");
+    const toggleAdminPassword = document.getElementById("toggleAdminPassword");
+
+    function openModal() {
+        if (!adminModal) {
+            return;
+        }
+        adminModal.classList.add("active");
+        adminModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeModal() {
+        if (!adminModal) {
+            return;
+        }
+        adminModal.classList.remove("active");
+        adminModal.setAttribute("aria-hidden", "true");
+    }
+
+    if (openAdminLogin) {
+        openAdminLogin.addEventListener("click", openModal);
+    }
+
+    if (closeAdminLogin) {
+        closeAdminLogin.addEventListener("click", closeModal);
+    }
+
+    if (adminModal) {
+        adminModal.addEventListener("click", (event) => {
+            if (event.target === adminModal) {
+                closeModal();
+            }
+        });
+    }
+
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && adminModal && adminModal.classList.contains("active")) {
+            closeModal();
+        }
+    });
+
+    if (toggleAdminPassword && adminPassword) {
+        toggleAdminPassword.addEventListener("click", () => {
+            const isPassword = adminPassword.getAttribute("type") === "password";
+            adminPassword.setAttribute("type", isPassword ? "text" : "password");
+            toggleAdminPassword.innerHTML = isPassword
+                ? '<i class="fas fa-eye-slash"></i>'
+                : '<i class="fas fa-eye"></i>';
+            toggleAdminPassword.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+        });
+    }
 });
