@@ -119,6 +119,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const openAdminLogin = document.getElementById("openAdminLogin");
     const closeAdminLogin = document.getElementById("closeAdminLogin");
     const adminModal = document.getElementById("adminModal");
+    const adminLoginForm = document.querySelector(".admin-login-form");
+    const adminUsername = document.getElementById("adminUsername");
     const adminPassword = document.getElementById("adminPassword");
     const toggleAdminPassword = document.getElementById("toggleAdminPassword");
 
@@ -168,6 +170,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? '<i class="fas fa-eye-slash"></i>'
                 : '<i class="fas fa-eye"></i>';
             toggleAdminPassword.setAttribute("aria-label", isPassword ? "Hide password" : "Show password");
+        });
+    }
+
+    if (adminLoginForm && adminUsername && adminPassword) {
+        adminLoginForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            const userName = adminUsername.value.trim();
+            const password = adminPassword.value.trim();
+
+            if (!userName || !password) {
+                window.alert("Enter both username and password.");
+                return;
+            }
+
+            if (typeof window.lifeFlowFindAdmin !== "function") {
+                window.alert("Firebase is not ready yet. Check firebase-config.js.");
+                return;
+            }
+
+            try {
+                const adminData = await window.lifeFlowFindAdmin(userName, password);
+
+                if (!adminData) {
+                    window.alert("Invalid admin username or password.");
+                    return;
+                }
+
+                sessionStorage.setItem("adminUserName", adminData.userName || userName);
+                window.location.href = "admin-dashboard.html";
+            } catch (error) {
+                console.error("Admin login failed", error);
+                window.alert("Unable to verify admin credentials right now.");
+            }
         });
     }
 });

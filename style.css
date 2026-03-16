@@ -651,3 +651,121 @@ footer {
         font-size: 1.05rem;
     }
 }
+
+/* Admin Dashboard */
+.dashboard-body {
+    min-height: 100vh;
+    animation: none;
+    background:
+        radial-gradient(circle at top left, rgba(231, 76, 60, 0.2), transparent 32%),
+        linear-gradient(135deg, #fff7f6, #f6ebeb);
+}
+
+.dashboard-shell {
+    width: min(1100px, 92%);
+    margin: 48px auto;
+}
+
+.dashboard-card {
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(192, 57, 43, 0.16);
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 24px 60px rgba(63, 24, 24, 0.12);
+}
+
+.dashboard-topbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+}
+
+.dashboard-eyebrow {
+    margin-bottom: 8px;
+    color: #b83b32;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+
+.dashboard-topbar h1 {
+    font-size: 2.4rem;
+    color: #1f2933;
+    margin-bottom: 6px;
+}
+
+.dashboard-subtitle {
+    color: #52606d;
+    font-size: 1.05rem;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.dashboard-link-btn,
+.dashboard-logout-btn {
+    border: none;
+    border-radius: 999px;
+    padding: 11px 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.dashboard-link-btn {
+    background: #fff1ef;
+    color: #b83b32;
+}
+
+.dashboard-logout-btn {
+    background: #c0392b;
+    color: #fff;
+}
+
+.dashboard-link-btn:hover,
+.dashboard-logout-btn:hover {
+    transform: translateY(-1px);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.dashboard-panel {
+    background: #fff;
+    border-radius: 18px;
+    padding: 22px;
+    border: 1px solid #f0d7d3;
+}
+
+.dashboard-panel h2 {
+    margin-bottom: 10px;
+    color: #1f2933;
+}
+
+.dashboard-panel p {
+    color: #52606d;
+    line-height: 1.6;
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-topbar {
+        flex-direction: column;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-topbar h1 {
+        font-size: 1.9rem;
+    }
+}

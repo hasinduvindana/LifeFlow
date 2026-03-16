@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | LifeFlow</title>
+    <link rel="icon" type="image/png" href="assets/images/logo.png">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <main class="dashboard-shell">
+        <section class="dashboard-card">
+            <div class="dashboard-topbar">
+                <div>
+                    <p class="dashboard-eyebrow">LifeFlow Admin</p>
+                    <h1>Admin Dashboard</h1>
+                    <p class="dashboard-subtitle">Welcome back, <span id="sessionAdminName"></span>.</p>
+                </div>
+                <div class="dashboard-actions">
+                    <a href="index.html" class="dashboard-link-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Site
+                    </a>
+                    <button type="button" id="adminLogoutBtn" class="dashboard-logout-btn">
+                        <i class="fas fa-right-from-bracket"></i> Logout
+                    </button>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <article class="dashboard-panel">
+                    <h2>Signed-in Admin</h2>
+                    <p id="dashboardAdminMessage"></p>
+                </article>
+                <article class="dashboard-panel">
+                    <h2>Session Status</h2>
+                    <p>Your current admin session is active in this browser tab.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
