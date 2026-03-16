@@ -356,6 +356,26 @@ body {
     background: #c0392b;
 }
 
+.login-success-popup {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3000;
+    background: #1f8f4f;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+
+.login-success-popup.hide {
+    opacity: 0;
+}
+
 /* Back to Top Button */
 #scrollToTop {
     display: none;
