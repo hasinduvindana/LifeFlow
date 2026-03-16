@@ -1,4 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
+    function showLoginSuccessPopup(message, durationMs) {
+        const popup = document.createElement("div");
+        popup.className = "login-success-popup";
+        popup.setAttribute("role", "status");
+        popup.setAttribute("aria-live", "polite");
+        popup.textContent = message;
+        document.body.appendChild(popup);
+
+        window.setTimeout(() => {
+            popup.classList.add("hide");
+            window.setTimeout(() => {
+                popup.remove();
+            }, 250);
+        }, Math.max(0, durationMs - 250));
+    }
+
     // Foreground typing animation that loops forever.
     const typingElement = document.getElementById("typing-text");
     const typingText = "Welcome to Life Flow Blood Donation Online Service Sri Lanka";
@@ -198,10 +214,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                sessionStorage.setItem("adminUserName", adminData.userName || userName);
-                window.location.href = "admin-dashboard.html";
+                const sessionUserName = adminData.userName || userName;
+                sessionStorage.setItem("adminUserName", sessionUserName);
+                closeModal();
+                showLoginSuccessPopup(`Welcome ${sessionUserName}`, 3000);
+                window.setTimeout(() => {
+                    window.location.href = "admin-dashboard.html";
+                }, 3000);
             } catch (error) {
                 console.error("Admin login failed", error);
+                if (error && error.code === "permission-denied") {
+                    window.alert("Firestore denied access to the admin collection. Update your Firebase security rules to allow this query.");
+                    return;
+                }
+
                 window.alert("Unable to verify admin credentials right now.");
             }
         });
