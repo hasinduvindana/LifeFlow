@@ -1,11 +1,16 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getAnalytics, isSupported } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-analytics.js";
 import {
+    addDoc,
+    doc,
     getFirestore,
     collection,
     getDocs,
     limit,
+    orderBy,
     query,
+    serverTimestamp,
+    setDoc,
     where
 } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
@@ -45,4 +50,52 @@ window.lifeFlowFindAdmin = async (userName, password) => {
     }
 
     return snapshot.docs[0].data();
+};
+
+window.lifeFlowFetchDonors = async () => {
+    const snapshot = await getDocs(collection(db, "donors"));
+    return snapshot.docs.map((docSnapshot) => ({ id: docSnapshot.id, ...docSnapshot.data() }));
+};
+
+window.lifeFlowFetchBloodStockMap = async () => {
+    const snapshot = await getDocs(collection(db, "bloodStock"));
+    const result = {};
+
+    snapshot.docs.forEach((docSnapshot) => {
+        result[docSnapshot.id] = docSnapshot.data();
+    });
+
+    return result;
+};
+
+window.lifeFlowUpsertBloodStock = async (bloodGroup, availableStock, neededValue, updatedBy) => {
+    await setDoc(
+        doc(db, "bloodStock", bloodGroup),
+        {
+            bloodGroup,
+            availableStock,
+            neededValue,
+            updatedBy,
+            updatedAt: serverTimestamp()
+        },
+        { merge: true }
+    );
+};
+
+window.lifeFlowAddEmergencyNotice = async (noticeData) => {
+    await addDoc(collection(db, "emergencyNotices"), {
+        ...noticeData,
+        createdAt: serverTimestamp()
+    });
+};
+
+window.lifeFlowFetchEmergencyNotices = async () => {
+    const noticeQuery = query(
+        collection(db, "emergencyNotices"),
+        orderBy("createdAt", "desc"),
+        limit(15)
+    );
+
+    const snapshot = await getDocs(noticeQuery);
+    return snapshot.docs.map((docSnapshot) => ({ id: docSnapshot.id, ...docSnapshot.data() }));
 };

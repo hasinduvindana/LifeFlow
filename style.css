@@ -710,6 +710,18 @@ footer {
     letter-spacing: 0.08em;
 }
 
+.dashboard-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dashboard-brand img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
 .dashboard-topbar h1 {
     font-size: 2.4rem;
     color: #1f2933;
@@ -719,6 +731,30 @@ footer {
 .dashboard-subtitle {
     color: #52606d;
     font-size: 1.05rem;
+}
+
+.dashboard-admin-message {
+    color: #52606d;
+    margin-bottom: 16px;
+}
+
+.dashboard-flash-message {
+    margin-bottom: 18px;
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.dashboard-flash-message.is-success {
+    background: #e5f8ed;
+    color: #1e6d40;
+    border: 1px solid #beeccc;
+}
+
+.dashboard-flash-message.is-error {
+    background: #fdeceb;
+    color: #9f2d2d;
+    border: 1px solid #f5c4c1;
 }
 
 .dashboard-actions {
@@ -776,6 +812,163 @@ footer {
     line-height: 1.6;
 }
 
+.dashboard-panel + .dashboard-panel {
+    margin-top: 18px;
+}
+
+.dashboard-panel-hint {
+    margin-bottom: 14px;
+}
+
+.dashboard-filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.dashboard-field {
+    display: grid;
+    gap: 6px;
+}
+
+.dashboard-field label {
+    font-size: 0.9rem;
+    color: #415161;
+    font-weight: 600;
+}
+
+.dashboard-field input,
+.dashboard-field select,
+.dashboard-field textarea {
+    border: 1px solid #d7dee7;
+    border-radius: 10px;
+    padding: 10px 11px;
+    background: #fff;
+    color: #1f2933;
+}
+
+.dashboard-filter-actions {
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    grid-column: span 4;
+}
+
+.dashboard-primary-btn,
+.dashboard-secondary-btn {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.dashboard-primary-btn {
+    background: #c0392b;
+    color: #fff;
+}
+
+.dashboard-secondary-btn {
+    background: #eef1f5;
+    color: #2f3d4a;
+}
+
+.dashboard-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 780px;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    border-bottom: 1px solid #edeff2;
+    text-align: left;
+    padding: 10px 10px;
+    vertical-align: top;
+}
+
+.dashboard-table th {
+    color: #4c5d6f;
+    background: #fafbfc;
+    position: sticky;
+    top: 0;
+}
+
+.dashboard-table td {
+    color: #1f2933;
+}
+
+.stock-input {
+    width: 140px;
+    border: 1px solid #d7dee7;
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+.dashboard-form {
+    display: grid;
+    gap: 12px;
+}
+
+.dashboard-checkbox-grid {
+    border: 1px solid #e2e7ee;
+    border-radius: 10px;
+    padding: 10px 12px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+}
+
+.dashboard-checkbox-grid legend {
+    font-weight: 700;
+    padding: 0 5px;
+    color: #3f4f5e;
+}
+
+.dashboard-checkbox-grid label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #1f2933;
+}
+
+.dashboard-notice-list {
+    margin-top: 18px;
+}
+
+.dashboard-notice-list h3 {
+    margin-bottom: 10px;
+}
+
+.dashboard-notice-list ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    padding: 0;
+}
+
+.dashboard-notice-list li {
+    border: 1px solid #ebd0cc;
+    border-radius: 10px;
+    background: #fffaf9;
+    padding: 12px;
+}
+
+.dashboard-notice-list li p {
+    margin-top: 5px;
+}
+
+.dashboard-notice-list li span {
+    color: #ab3a33;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 768px) {
     .dashboard-topbar {
         flex-direction: column;
@@ -787,5 +980,18 @@ footer {
 
     .dashboard-topbar h1 {
         font-size: 1.9rem;
+    }
+
+    .dashboard-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-filter-actions {
+        grid-column: span 1;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-checkbox-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }

@@ -7,13 +7,17 @@
     <link rel="icon" type="image/png" href="assets/images/logo.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module" src="firebase-config.js"></script>
 </head>
 <body class="dashboard-body">
     <main class="dashboard-shell">
         <section class="dashboard-card">
             <div class="dashboard-topbar">
                 <div>
-                    <p class="dashboard-eyebrow">LifeFlow Admin</p>
+                    <div class="dashboard-brand">
+                        <img src="assets/images/logo.png" alt="LifeFlow Logo">
+                        <p class="dashboard-eyebrow">LifeFlow Admin</p>
+                    </div>
                     <h1>Admin Dashboard</h1>
                     <p class="dashboard-subtitle">Welcome back, <span id="sessionAdminName"></span>.</p>
                 </div>
@@ -27,16 +31,120 @@
                 </div>
             </div>
 
-            <div class="dashboard-grid">
-                <article class="dashboard-panel">
-                    <h2>Signed-in Admin</h2>
-                    <p id="dashboardAdminMessage"></p>
-                </article>
-                <article class="dashboard-panel">
-                    <h2>Session Status</h2>
-                    <p>Your current admin session is active in this browser tab.</p>
-                </article>
-            </div>
+            <p id="dashboardAdminMessage" class="dashboard-admin-message"></p>
+            <p id="dashboardFlashMessage" class="dashboard-flash-message" hidden></p>
+
+            <article class="dashboard-panel">
+                <h2>Blood Donors</h2>
+                <form id="donorFilterForm" class="dashboard-filters" autocomplete="off">
+                    <div class="dashboard-field">
+                        <label for="filterDob">Date of Birth</label>
+                        <input type="date" id="filterDob" name="filterDob">
+                    </div>
+                    <div class="dashboard-field">
+                        <label for="filterAddress">Address</label>
+                        <input type="text" id="filterAddress" name="filterAddress" placeholder="e.g. Colombo">
+                    </div>
+                    <div class="dashboard-field">
+                        <label for="filterBloodGroup">Blood Group</label>
+                        <select id="filterBloodGroup" name="filterBloodGroup">
+                            <option value="">All</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                    </div>
+                    <div class="dashboard-field">
+                        <label for="filterGender">Gender</label>
+                        <select id="filterGender" name="filterGender">
+                            <option value="">All</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="dashboard-filter-actions">
+                        <button type="submit" class="dashboard-primary-btn">Apply Filters</button>
+                        <button type="button" id="resetDonorFilters" class="dashboard-secondary-btn">Reset</button>
+                    </div>
+                </form>
+
+                <div class="dashboard-table-wrap">
+                    <table class="dashboard-table" id="donorTable">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Blood Group</th>
+                                <th>Date of Birth</th>
+                                <th>Address</th>
+                                <th>Gender</th>
+                                <th>Contact Number</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donorTableBody"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="dashboard-panel">
+                <h2>Blood Stock and Needed Values</h2>
+                <p class="dashboard-panel-hint">Update available stock and needed units for each blood group.</p>
+                <div class="dashboard-table-wrap">
+                    <table class="dashboard-table" id="stockTable">
+                        <thead>
+                            <tr>
+                                <th>Blood Group</th>
+                                <th>Available Stock</th>
+                                <th>Needed Units</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stockTableBody"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="dashboard-panel">
+                <h2>Emergency Blood Need Notice</h2>
+                <form id="emergencyNoticeForm" class="dashboard-form" autocomplete="off">
+                    <div class="dashboard-field">
+                        <label for="noticeTitle">Title</label>
+                        <input type="text" id="noticeTitle" name="noticeTitle" placeholder="Emergency blood request" required>
+                    </div>
+                    <div class="dashboard-field">
+                        <label for="noticeDescription">Description</label>
+                        <textarea id="noticeDescription" name="noticeDescription" rows="4" placeholder="Explain the emergency request" required></textarea>
+                    </div>
+                    <div class="dashboard-field">
+                        <label for="noticeNeededBefore">Needed Before (Date)</label>
+                        <input type="date" id="noticeNeededBefore" name="noticeNeededBefore" required>
+                    </div>
+                    <fieldset class="dashboard-checkbox-grid">
+                        <legend>Needed Blood Groups</legend>
+                        <label><input type="checkbox" name="neededBloodGroup" value="A+"> A+</label>
+                        <label><input type="checkbox" name="neededBloodGroup" value="A-"> A-</label>
+                        <label><input type="checkbox" name="neededBloodGroup" value="B+"> B+</label>
+                        <label><input type="checkbox" name="neededBloodGroup" value="B-"> B-</label>
+                        <label><input type="checkbox" name="neededBloodGroup" value="AB+"> AB+</label>
+                        <label><input type="checkbox" name="neededBloodGroup" value="AB-"> AB-</label>
+                        <label><input type="checkbox" name="neededBloodGroup" value="O+"> O+</label>
+                        <label><input type="checkbox" name="neededBloodGroup" value="O-"> O-</label>
+                    </fieldset>
+                    <button type="submit" class="dashboard-primary-btn">Publish Emergency Notice</button>
+                </form>
+
+                <div class="dashboard-notice-list">
+                    <h3>Recent Emergency Notices</h3>
+                    <ul id="noticeList"></ul>
+                </div>
+            </article>
         </section>
     </main>
 
