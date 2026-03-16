@@ -41,6 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 3500);
     }
 
+    // Mobile navbar toggle behavior.
+    const burger = document.querySelector(".burger");
+    const navLinks = document.querySelector(".nav-links");
+
+    if (burger && navLinks) {
+        burger.addEventListener("click", () => {
+            navLinks.classList.toggle("mobile-open");
+        });
+
+        navLinks.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("mobile-open");
+            });
+        });
+    }
+
     // Pie chart.
     const pieCanvas = document.getElementById("bloodPieChart");
     if (pieCanvas) {

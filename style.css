@@ -138,6 +138,22 @@ body {
     transform: translateY(-1px);
 }
 
+.burger {
+    display: none;
+    border: none;
+    background: transparent;
+    padding: 6px;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 24px;
+    height: 2px;
+    background: #2c3e50;
+    margin: 5px 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
 /* Typing Animation Container */
 .typing-container {
     position: absolute;
@@ -369,7 +385,69 @@ footer {
 
 /* Mobile Compatibility */
 @media screen and (max-width: 768px) {
-    .nav-links { display: none; } /* Simplified for this example */
+    .navbar {
+        position: relative;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logo span {
+        font-size: 1.2rem;
+    }
+
+    .admin-login-btn {
+        order: 2;
+        margin-left: auto;
+    }
+
+    .burger {
+        display: block;
+        order: 3;
+    }
+
+    .nav-links {
+        display: none;
+        order: 4;
+        width: 100%;
+        margin-top: 10px;
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.96);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .nav-links.mobile-open {
+        display: flex;
+    }
+
+    .nav-links li a {
+        display: block;
+        padding: 12px 10px;
+    }
+
+    .dropdown .submenu {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        min-width: 0;
+        box-shadow: none;
+        border-radius: 0;
+        background: transparent;
+        padding: 0 0 0 10px;
+    }
+
+    .submenu li a {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    .submenu li a:hover {
+        background: transparent;
+    }
+
     .admin-login-btn {
         padding: 8px 12px;
         font-size: 0.85rem;
